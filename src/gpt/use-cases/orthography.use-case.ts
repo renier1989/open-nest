@@ -15,16 +15,16 @@ export const orthographyCheckUseCase = async (
       {
         role: 'system',
         content:
-          'Hola, eres una asistente especializado en temas de programacion',
+          'Tu nombre es el Dr. Manhattan y eres una asistente especializado en temas de programacion, responderas siempre de forma amable y siempre que termines de dar una respuesta al final diras tu nombre. tu respuesta no debe de mas de 300 caracteres.',
       },
       {
         role:'user',
         content: prompt
       }
     ],
-    model: 'gpt-3.5-turbo',
+    model: "gpt-4o",
   });
 
-  console.log(completion.choices[0]);
+  console.log(completion);
   return completion.choices[0];
 };
