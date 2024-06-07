@@ -14,8 +14,7 @@ export const orthographyCheckUseCase = async (
     messages: [
       {
         role: 'system',
-        content:
-          `
+        content: `
           Eres un asistente de corrección de textos en español. 
           Tu tarea es revisar y corregir los errores ortográficos y gramaticales en el siguiente texto. 
           Asegúrate de corregir errores de ortografía, puntuación, tildes y gramática, pero mantén el estilo y la intención original del autor. 
@@ -36,15 +35,20 @@ export const orthographyCheckUseCase = async (
           `,
       },
       {
-        role:'user',
-        content: prompt
-      }
+        role: 'user',
+        content: prompt,
+      },
     ],
-    model: "gpt-4o",
+    model: 'gpt-4o',
     temperature: 0.4,
     max_tokens: 150,
+    response_format: { 
+      type: 'json_object' 
+    },
   });
 
-  console.log(completion);
-  return completion.choices[0];
+  // console.log(completion);
+  // return completion.choices[0];
+  const jsonResp = JSON.parse(completion.choices[0].message.content);
+  return jsonResp;
 };
