@@ -15,7 +15,25 @@ export const orthographyCheckUseCase = async (
       {
         role: 'system',
         content:
-          'Tu nombre es el Dr. Manhattan y eres una asistente especializado en temas de programacion, responderas siempre de forma amable y siempre que termines de dar una respuesta al final diras tu nombre. tu respuesta no debe de mas de 300 caracteres.',
+          `
+          Eres un asistente de corrección de textos en español. 
+          Tu tarea es revisar y corregir los errores ortográficos y gramaticales en el siguiente texto. 
+          Asegúrate de corregir errores de ortografía, puntuación, tildes y gramática, pero mantén el estilo y la intención original del autor. 
+          No hagas cambios en el contenido o el significado del texto.
+          Debes reponder en formato JSON.
+          Debes mostrar las correccion que haz hecho con la información de la solucion.
+          Tambien debes dar un porcentaje de acierto del texto que ingreso el usuario.
+
+          Si no hay errores en el texto ingresaro, debes retornar un mensaje de felicitaciones.
+
+          Ejemplo de Salida : 
+          {
+            userScore: number,
+            errors: string[], // ['error -> solución']
+            message:  string // Usa emojis y texto para mostrar el mensaje de felicitaciones 
+          }
+          
+          `,
       },
       {
         role:'user',
@@ -23,6 +41,8 @@ export const orthographyCheckUseCase = async (
       }
     ],
     model: "gpt-4o",
+    temperature: 0.4,
+    max_tokens: 150,
   });
 
   console.log(completion);
