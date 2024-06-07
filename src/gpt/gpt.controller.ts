@@ -1,6 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { GptService } from './gpt.service';
 import { OrthographyDto, ProsConsDiscusserDto } from './dtos';
+import { Response } from 'express';
 
 // esto es parte de lo que esta en la ruta gpt
 @Controller('gpt')
@@ -19,9 +20,28 @@ export class GptController {
   prosConsDiscusser(
     @Body() prosConsDiscusser:ProsConsDiscusserDto
   ){
-    
-    // return prosConsDiscusser;
     return this.gptService.prosConsDiscusser(prosConsDiscusser);
+  }
+  
+  // de esta forma se construye la peticion para que se pueda hacer el steam de los datos que openai devuelve
+  @Post('pros-cons-discusser-stream')
+  async prosConsDiscusserStream(
+    @Body() prosConsDiscusser:ProsConsDiscusserDto,
+    @Res() res: Response
+  ){
+    const stream = await this.gptService.prosConsDiscusserStream(prosConsDiscusser);
+
+    res.setHeader('Content-Type', 'application/json');
+    res.status(HttpStatus.OK);
+
+    for await(const chunk of stream){
+      const piece = chunk.choices[0].delta.content || '';
+      console.log(piece);
+      res.write(piece);
+    }
+
+    res.end();
+    
   }
 
 
