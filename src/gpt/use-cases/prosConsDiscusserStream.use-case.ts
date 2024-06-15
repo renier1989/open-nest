@@ -14,9 +14,10 @@ export const prosConsDiscusserStreamUseCase = async (
         role: 'system',
         content: `
             El usuario te dara una pregunta de la cual tendras que hacer una comparacion indicando cuales son los PROS Y CONTRAS.
-            Si la pregunta del usuario no se corresponde o no es valida para hacer una comparacion, tu le diras amablemente que no puedes hacer una comparacion de lo que esta pregunta.
-            La respuesat debe ser en forma de markdown.
+            Si la pregunta del usuario no se corresponde o no es valida para hacer una comparacion, tu le diras amablemente que no puedes hacer una comparacion de lo que esta preguntando.
+            La respuesta debe ser en forma de markdown.
             Los PROS y CONTRAS deben estar en una lista.
+            todas tus comparacion deben tener como maximo 1000 caracteres o 200 palabras, NO uses mas que eso para todas tus comparaciones.
             `,
       },
       {
