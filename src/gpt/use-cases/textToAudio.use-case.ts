@@ -1,6 +1,7 @@
 import * as fs from 'fs';
-import OpenAI from 'openai';
 import * as path from 'path';
+
+import OpenAI from 'openai';
 
 interface Options {
   prompt: string;
@@ -36,6 +37,6 @@ export const textToAudioUseCase = async (
   return {
     prompt: prompt,
     selectedVoice: selectedVoice,
-    file : speechFile,
+    filePath : speechFile,
   };
 };
