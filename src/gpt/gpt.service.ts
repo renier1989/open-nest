@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { audiotoTextUseCase, orthographyCheckUseCase, prosConsDiscusserStreamUseCase, prosConsDiscusserUseCase, textToAudioUseCase, translateUseCase } from './use-cases';
-import { OrthographyDto, ProsConsDiscusserDto, TextToAudioDto, TranslateDto } from './dtos';
+import { audiotoTextUseCase, imageGenerationUseCase, orthographyCheckUseCase, prosConsDiscusserStreamUseCase, prosConsDiscusserUseCase, textToAudioUseCase, translateUseCase } from './use-cases';
+import { ImageGenerationDto, OrthographyDto, ProsConsDiscusserDto, TextToAudioDto, TranslateDto } from './dtos';
 import OpenAI from 'openai';
 import { AudioToTextDto } from './dtos/audioToText.dto';
 
@@ -47,5 +47,9 @@ export class GptService {
   async audioToText(audioFile : Express.Multer.File, audioToTextDto :AudioToTextDto) {
     const {prompt} = audioToTextDto // ya en el DTO esta definido que puede ser opcional
     return await audiotoTextUseCase(this.openai, { audioFile, prompt });
+  }
+
+  async imageGeneration(imageGenerationDto :ImageGenerationDto){
+    return await imageGenerationUseCase(this.openai, {...imageGenerationDto});
   }
 }
