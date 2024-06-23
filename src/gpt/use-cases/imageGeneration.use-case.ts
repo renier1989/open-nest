@@ -23,13 +23,11 @@ export const imageGenerationUseCase = async ( openai: OpenAI , options: Options)
     });
     // TODO: TOMAR LA IMAGEN Y GUARDARLA EN EL FS}
 
-    await downloadImageAsPng(response.data[0].url);
-
-    console.log({response});
+    const url = await downloadImageAsPng(response.data[0].url);
 
     return {
-        url : response.data[0].url,
-        localPath : '',
+        url : url,
+        openaiUrl : response.data[0].url,
         revised_prompt:  response.data[0].revised_prompt
     }
     
