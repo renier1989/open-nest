@@ -25,7 +25,7 @@ export const imageGenerationUseCase = async (
       response_format: 'url',
     });
     // TODO: TOMAR LA IMAGEN Y GUARDARLA EN EL FS
-    const fileName = await downloadImageAsPng(response.data[0].url); // solo retorna el nombre del archivo
+    const fileName = await downloadImageAsPng(response.data[0].url); 
     const url = `${process.env.SERVER_URL}/gpt/image-generation/${fileName}`;
 
     return {
@@ -51,7 +51,7 @@ export const imageGenerationUseCase = async (
     response_format: 'url',
   });
 
-  const fileName = await downloadImageAsPng(response.data[0].url); // solo retorna el nombre del archivo
+  const fileName = await downloadImageAsPng(response.data[0].url); 
   const url = `${process.env.SERVER_URL}/gpt/image-generation/${fileName}`;
 
   return {
