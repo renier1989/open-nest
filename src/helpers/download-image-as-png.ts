@@ -19,7 +19,7 @@ export const downloadImageAsPng = async (url: string) => {
 
   const completePath = path.join(folderPath, imageNamePng);
   await sharp(buffer).png().ensureAlpha().toFile(completePath); // con esto guardamos la imagen siempre en forma PNG
-  return completePath;
+  return imageNamePng;
 };
 
 export const downloadBase64ImageAsPng = async (base64Image: string) => {
@@ -39,5 +39,5 @@ export const downloadBase64ImageAsPng = async (base64Image: string) => {
     .ensureAlpha()
     .toFile(completePath);
 
-  return completePath;
+  return imageNamePng;
 };
