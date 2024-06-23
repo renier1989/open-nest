@@ -12,24 +12,22 @@ export const imageVariationUseCase = async (
 ) => {
   const { baseImage } = options;
 
-  const pngPathImage = await downloadImageAsPng(baseImage,true);
-  
+  const pngPathImage = await downloadImageAsPng(baseImage, true);
+
   const response = await openai.images.createVariation({
     model: 'dall-e-2',
     image: fs.createReadStream(pngPathImage),
-    n:1,
+    n: 1,
     size: '1024x1024',
-    response_format: 'url'
-  })
+    response_format: 'url',
+  });
 
-  const fileName = await downloadImageAsPng(response.data[0].url, false); 
+  const fileName = await downloadImageAsPng(response.data[0].url, false);
   const url = `${process.env.SERVER_URL}/gpt/image-generation/${fileName}`;
-  
+
   return {
     url: url,
     openaiUrl: response.data[0].url,
     revised_prompt: response.data[0].revised_prompt,
   };
-
-  return baseImage;
 };
