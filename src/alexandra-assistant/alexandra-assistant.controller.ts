@@ -9,14 +9,14 @@ export class AlexandraAssistantController {
 
   @Post('create-thread')
   async createThread(){
-    return this.alexandraAssistantService.createThread();
+    return await this.alexandraAssistantService.createThread();
   }
 
   @Post('user-question')
   async userQuestion(
     @Body() questionDto: QuestionDto
   ){
-    return questionDto;
+    return await this.alexandraAssistantService.userQuestion(questionDto);
   }
 
 }
