@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
-import { createMessageUseCase, createThreadUseCase } from './use-cases';
+import { createMessageUseCase, createRunUseCase, createThreadUseCase } from './use-cases';
 import { QuestionDto } from './dtos/question.dto';
 
 @Injectable()
@@ -16,7 +16,8 @@ export class AlexandraAssistantService {
   async userQuestion(questiondto:QuestionDto){
     const { threadId,question} = questiondto
     const message = await createMessageUseCase(this.openai, {threadId,question});
-    return message;
+    const run = await createRunUseCase(this.openai, {threadId});
+    // return message;
   }
 
 
