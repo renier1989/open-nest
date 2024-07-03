@@ -9,7 +9,7 @@ export class AlexandraAssistantController {
 
   @Post('create-thread')
   async createThread(){
-    return 'create-thread';
+    return this.alexandraAssistantService.createThread();
   }
 
   @Post('user-question')
